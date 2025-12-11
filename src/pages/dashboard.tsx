@@ -71,51 +71,35 @@ const MyDashboard = () => {
       ></Titlebar>
       {/* start widget */}
       <Row>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Savings"}
+            title={"Users"}
             value={0}
             color={"green"}
             percent={80}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Loans"}
+            title={"Benches"}
             value={0}
             color={"red"}
             percent={40}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Interest"}
+            title={"Instruments"}
             value={0}
             color={"orange"}
             percent={70}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Penalty"}
+            title={"Tests"}
             value={0}
             color={"red"}
-            percent={90}
-          ></Ticker>
-        </Col>
-        <Col xl={2} lg={2}>
-          <Ticker
-            title={"Share"}
-            value={0}
-            color={"blue"}
-            percent={90}
-          ></Ticker>
-        </Col>
-        <Col xl={2} lg={2}>
-          <Ticker
-            title={"Social"}
-            value={0}
-            color={"green"}
             percent={90}
           ></Ticker>
         </Col>
