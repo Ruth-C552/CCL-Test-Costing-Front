@@ -35,21 +35,40 @@ const MyDashboard = () => {
 
   const [loading, setLoading] = useState(false);
 
+  //State for Lists
+  const [testsData, setTestsData] = useState([]);
+  const [instrumenstData, setInstrumentsData] = useState([]);
+  const [benchesData, setBenchesData] = useState([]);
 
-  const pageConfig = new PageConfig(
-    `Dashboard`,
-    "",
-    "",
-    "User",
-    ``,
-  );
+  //State for Counts (Top Widgets)
+  const [userCount, setUserCount] = useState(0);
+
+  const pageConfig = new PageConfig(`Dashboard`, "", "", "User", ``,);
 
   useEffect(() => {
+    setLoading(true);
 
+    //Fetch all data from backend to populate counts and lists
+    Promise.all([
+      Assist.loadData("Users", "users/list"),
+      Assist.loadData("Tests", "lab-tests/list"),
+      Assist.loadData("Instruments", "lab-instruments/list"),
+      Assist.loadData("Benches", "lab-benches/list"),
+
+    ])
+      .then(([users, tests, instruments, benches]) => {
+        setUserCount(users.length);
+        setTestsData(test);
+        setInstrumentsData(instruments);
+        setBenchesData(benches);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        Assist.showMessage("Error loading dashboard data", "error");
+      });
 
   }, []);
-
-
 
 
   return (
@@ -71,35 +90,51 @@ const MyDashboard = () => {
       ></Titlebar>
       {/* start widget */}
       <Row>
-        <Col xl={3} lg={3}>
+        <Col xl={2} lg={2}>
           <Ticker
-            title={"Users"}
+            title={"Savings"}
             value={0}
             color={"green"}
             percent={80}
           ></Ticker>
         </Col>
-        <Col xl={3} lg={3}>
+        <Col xl={2} lg={2}>
           <Ticker
-            title={"Benches"}
+            title={"Loans"}
             value={0}
             color={"red"}
             percent={40}
           ></Ticker>
         </Col>
-        <Col xl={3} lg={3}>
+        <Col xl={2} lg={2}>
           <Ticker
-            title={"Instruments"}
+            title={"Interest"}
             value={0}
             color={"orange"}
             percent={70}
           ></Ticker>
         </Col>
-        <Col xl={3} lg={3}>
+        <Col xl={2} lg={2}>
           <Ticker
-            title={"Tests"}
+            title={"Penalty"}
             value={0}
             color={"red"}
+            percent={90}
+          ></Ticker>
+        </Col>
+        <Col xl={2} lg={2}>
+          <Ticker
+            title={"Share"}
+            value={0}
+            color={"blue"}
+            percent={90}
+          ></Ticker>
+        </Col>
+        <Col xl={2} lg={2}>
+          <Ticker
+            title={"Social"}
+            value={0}
+            color={"green"}
             percent={90}
           ></Ticker>
         </Col>
@@ -195,6 +230,53 @@ const MyDashboard = () => {
                   format={"dd MMMM yyy HH:mm"}
                   hidingPriority={1}
                 ></Column>
+              </DataGrid>
+            </Card>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col sz={12} sm={12} lg={12}>
+          <Card title={"Benches"} showHeader={true}>
+            <Card showHeader={false}>
+              <DataGrid 
+               className={"dx-card wide-card"}
+               dataSource={[]}
+               showColumnHeaders={false}
+               keyExpr={"id"}
+               noDataText={"No benches added yet"}
+               showBorders={false}
+               focusedRowEnabled={false}
+               defaultFocusedRowIndex={0}
+               columnAutoWidth={true}
+               columnHidingEnabled={true}
+               >
+                <Paging defaultPageSize={10} />
+                <Editing
+                  mode="row"
+                  allowUpdating={false}
+                  allowDeleting={false}
+                  allowAdding={false}
+                  />
+                  <Pager showPageSizeSelector={true} showInfo={true} />
+                  <Column
+                  dataField="id"
+                  caption="ID"
+                  hidingPriority={3}
+                  visible={false}
+                  ></Column>
+                  <Column
+                  dataField="title"
+                  caption="Title"
+                  hidingPriority={2}
+                  ></Column>
+                  <Column
+                  dataField="created_at"
+                  caption="Date"
+                  dataType="date"
+                  format={"dd MMMM yyy HH:mm"}
+                  hidingPriority={1}
+                  ></Column>
               </DataGrid>
             </Card>
           </Card>

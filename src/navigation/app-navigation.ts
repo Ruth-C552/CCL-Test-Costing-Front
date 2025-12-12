@@ -50,4 +50,40 @@ export const navigation: MenuItem[] = [
       },
     ],
   },
+
+  {
+    key: "tests",
+    text: "Tests",
+    icon: "fa fa-exchange",
+    path: "#",
+    roles: [1, 2],
+    items:[
+      {
+        key: "groups",
+        text: "All Tests",
+        icon: "",
+        path: "/admin/tests/list",
+        roles: [1, 2],
+        items: [],
+      },
+    ],
+  },
+
+  {
+    key: "instruments",
+    text: "Instruments",
+    icon: "fa fa-exchange",
+    path: "#",
+    roles: [1, 2],
+    items:[
+      {
+        key: "groups",
+        text: "All Instruments",
+        icon: "",
+        path: "/admin/instruments/list",
+        roles: [1, 2],
+        items: [],
+      },
+    ],
+  },
 ];

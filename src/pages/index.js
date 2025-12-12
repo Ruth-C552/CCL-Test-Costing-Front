@@ -16,6 +16,13 @@ export { default as AdminUserPage } from './admin/users/user'
 export { default as AdminBenchesPage } from './admin/benches/bench_list'
 export { default as AdminBenchEditPage } from './admin/benches/bench_edit'
 
+export { default as AdminTestsPage } from './admin/tests/tests_list'
+export { default as AdminTestsEditPage } from './admin/tests/tests_edit'
+
+export { default as AdminInstrumentsPage } from './admin/instruments/instruments_list'
+export { default as AdminInstrumentsEditPage } from './admin/instruments/instruments_edit'
+
+
 //dashboard
 export { default as MemberDashboardPage } from './dashboard'
 

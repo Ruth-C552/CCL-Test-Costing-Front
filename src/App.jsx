@@ -16,7 +16,11 @@ import {
   AdminUsersPage,
   AdminUserEditPage,
   AdminUserPage,
-
+  AdminTestsPage,
+  AdminTestsEditPage,
+  AdminInstrumentsPage,
+  AdminInstrumentsEditPage,
+  
 } from "./pages";
 import { BrowserRouter } from "react-router-dom";
 
@@ -48,6 +52,19 @@ function App() {
           <Route path="/admin/benches/list" element={<AdminBenchesPage/>} />
           <Route path="/admin/benches/add" element={<AdminBenchEditPage/>} />
           <Route path="/admin/benches/edit/:eId" element={<AdminBenchEditPage/>} />
+
+          
+          {/*expense and earnings*/}
+          <Route path="/admin/tests/list" element={<AdminTestsPage/>} />
+          <Route path="/admin/tests/add" element={<AdminTestsEditPage/>} />
+          <Route path="/admin/tests/edit/:eId" element={<AdminTestsEditPage/>} />
+
+          
+          {/*expense and earnings*/}
+          <Route path="/admin/instruments/list" element={<AdminInstrumentsPage/>} />
+          <Route path="/admin/instruments/add" element={<AdminInstrumentsEditPage/>} />
+          <Route path="/admin/instruments/edit/:eId" element={<AdminInstrumentsEditPage/>} />
+          
     
           {/* Error */}   
           <Route path="*" element={<NotFoundPage></NotFoundPage>} />
