@@ -71,7 +71,7 @@ const MyDashboard = () => {
       ></Titlebar>
       {/* start widget */}
       <Row>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
             title={"Users"}
             value={0}
@@ -79,25 +79,25 @@ const MyDashboard = () => {
             percent={80}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Routes"}
+            title={"Loans"}
             value={0}
             color={"red"}
             percent={40}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Customers"}
+            title={"Interest"}
             value={0}
             color={"orange"}
             percent={70}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
+        <Col xl={3} lg={3}>
           <Ticker
-            title={"Towns"}
+            title={"Penalty"}
             value={0}
             color={"red"}
             percent={90}
@@ -105,7 +105,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Meters"}
+            title={"Share"}
             value={0}
             color={"blue"}
             percent={90}
@@ -113,7 +113,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Meter Readings"}
+            title={"Social"}
             value={0}
             color={"green"}
             percent={90}
