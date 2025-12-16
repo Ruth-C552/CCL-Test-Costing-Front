@@ -58,7 +58,7 @@ const MyDashboard = () => {
     ])
       .then(([users, tests, instruments, benches]) => {
         setUserCount(users.length);
-        setTestsData(test);
+        setTestsData(tests);
         setInstrumentsData(instruments);
         setBenchesData(benches);
         setLoading(false);
