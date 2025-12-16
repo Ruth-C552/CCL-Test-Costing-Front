@@ -53,6 +53,9 @@ class Assist {
   static RESPONSE_NO = 1;
   static RESPONSE_YES = 2;
 
+  static ROLE_ADMINISTRATOR = 1;
+  static ROLE_METERREADER = 2;
+
   static NOTIFY_WAITING = 1;
   static NOTIFY_SENT = 2;
 

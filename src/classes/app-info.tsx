@@ -1,16 +1,17 @@
 const AppInfo = {
-  appName: "CIDRZ Central Lab Test Costing",
-  appCode: "CCL",
+  appName: "Luapula Water",
+  appCode: "LpWSC",
   apiUrl: "http://127.0.0.1:8700/",
   onlineApiUrl: "",
   localApiUrl: "http://127.0.0.1:8700/",
-  configApiUrl: "sacco-config/1",
+  configApiUrl: "app-config/1",
   uploadUrl: "",
   fileServer: "",
   noImageUrl: "",
   yesNoList: ["No", "Yes"],
   paymethodsList: ["Bank Transfer", "Airtel", "MTN", "Zamtel"],
   memberPaymentMethodList: ["Mobile", "Bank"],
+  userRoleList: ["Administrator", "Meter Reader"],
   htmlToolbar: {
     items: [
       "undo",

@@ -11,11 +11,17 @@ import {
   //Auth
   LoginPage,
   SignupPage,
-  AdminBenchesPage,
-  AdminBenchEditPage,
   AdminUsersPage,
   AdminUserEditPage,
   AdminUserPage,
+  StatusesPage,
+  ReviewStagesPage,
+  AdminUserRolesPage,
+  AdminTownsPage,
+  AdminWalkRoutesPage,
+  AdminCustomersPage,
+  AdminMetersPage,
+  AdminMeterReadingsPage,
 
 } from "./pages";
 import { BrowserRouter } from "react-router-dom";
@@ -34,21 +40,31 @@ function App() {
         >
 
           {/* ADMIN */}
+          {/* Dictionaries */}
+          <Route path="/admin/dictionairies/statuses" element={<StatusesPage></StatusesPage>} />
+          <Route path="/admin/dictionairies/review-stages" element={<ReviewStagesPage></ReviewStagesPage>} />
+         
           {/* users */}
           <Route path="/admin/users/list" element={<AdminUsersPage/>} />
           <Route path="/admin/users/edit/:eId" element={<AdminUserEditPage/>} />
           <Route path="/admin/users/add" element={<AdminUserEditPage/>} />
           <Route path="/admin/users/view/:eId" element={<AdminUserPage/>} />
           <Route path="/users/view/id/:eId" element={<AdminUserPage/>} />
+          {/* roles */}
+          <Route path="/admin/roles/list" element={<AdminUserRolesPage/>} />
+          {/* towns */}
+          <Route path="/admin/towns/list" element={<AdminTownsPage/>} />
+          {/* walk routes */}
+          <Route path="/admin/walk-routes/list" element={<AdminWalkRoutesPage/>} />
+          {/* customers */}
+          <Route path="/admin/customers/list" element={<AdminCustomersPage/>} />
+           {/* meters */}
+          <Route path="/admin/meters/list" element={<AdminMetersPage/>} />
+          {/* meter readings */}
+          <Route path="/admin/meter-readings/list" element={<AdminMeterReadingsPage/>} />
           {/* Dashboards */}
           <Route path="/" element={<MemberDashboardPage></MemberDashboardPage>} />
 
-
-          {/*expense and earnings*/}
-          <Route path="/admin/benches/list" element={<AdminBenchesPage/>} />
-          <Route path="/admin/benches/add" element={<AdminBenchEditPage/>} />
-          <Route path="/admin/benches/edit/:eId" element={<AdminBenchEditPage/>} />
-    
           {/* Error */}   
           <Route path="*" element={<NotFoundPage></NotFoundPage>} />
         </Route>

@@ -51,6 +51,16 @@ export const UserDetail = ({
             </div>
           </div>
           <div className="dx-field">
+            <div className="dx-field-label">Role</div>
+            <div className="dx-field-value-static">
+              <strong>
+                {announcement.role == Assist.ROLE_ADMINISTRATOR
+                  ? "Administrator"
+                  : "Meter Reader"}
+              </strong>
+            </div>
+          </div>
+          <div className="dx-field">
             <div className="dx-field-label">Physical address</div>
             <div className="dx-field-value-static">
               <strong>{announcement.address_physical}</strong>

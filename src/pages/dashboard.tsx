@@ -73,7 +73,7 @@ const MyDashboard = () => {
       <Row>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Savings"}
+            title={"Users"}
             value={0}
             color={"green"}
             percent={80}
@@ -81,7 +81,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Loans"}
+            title={"Routes"}
             value={0}
             color={"red"}
             percent={40}
@@ -89,7 +89,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Interest"}
+            title={"Customers"}
             value={0}
             color={"orange"}
             percent={70}
@@ -97,7 +97,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Penalty"}
+            title={"Towns"}
             value={0}
             color={"red"}
             percent={90}
@@ -105,7 +105,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Share"}
+            title={"Meters"}
             value={0}
             color={"blue"}
             percent={90}
@@ -113,7 +113,7 @@ const MyDashboard = () => {
         </Col>
         <Col xl={2} lg={2}>
           <Ticker
-            title={"Social"}
+            title={"Meter Readings"}
             value={0}
             color={"green"}
             percent={90}
