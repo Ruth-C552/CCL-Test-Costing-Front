@@ -35,21 +35,44 @@ const MyDashboard = () => {
 
   const [loading, setLoading] = useState(false);
 
+  //State for Lists
+  const [testsData, setTestsData] = useState([]);
+  const [instrumentsData, setInstrumentsData] = useState([]);
+  const [benchesData, setBenchesData] = useState([]);
 
-  const pageConfig = new PageConfig(
-    `Dashboard`,
-    "",
-    "",
-    "User",
-    ``,
-  );
+  //State for Counts (Top Widgets)
+  const [userCount, setUserCount] = useState(0);
+
+  const pageConfig = new PageConfig(`Dashboard`, "", "", "User", ``,);
 
   useEffect(() => {
+    setLoading(true);
 
+    //Fetch all data from backend to populate counts and lists
+    Promise.all([
+      Assist.loadData("Users", "users/list"),
+      Assist.loadData("Tests", "lab-tests/list"),
+      Assist.loadData("Instruments", "lab-instruments/list"),
+      Assist.loadData("Benches", "lab-benches/list"),
+
+    ])
+    //cast entire result array
+    .then((results: any) => {
+      // destructure them safely
+      const [users, tests, instruments, benches] = results;
+
+      setUserCount(users.length);
+      setTestsData(tests);
+      setInstrumentsData(instruments);
+      setBenchesData(benches);
+      setLoading(false);
+    })
+    .catch((err) => {
+      setLoading(false);
+      console.error(err);
+    });
 
   }, []);
-
-
 
 
   return (
@@ -69,37 +92,54 @@ const MyDashboard = () => {
         icon={"home"}
         url={""}
       ></Titlebar>
+
       {/* start widget */}
       <Row>
-        <Col xl={3} lg={3}>
+        <Col xl={3} lg={2} sm={6}>
           <Ticker
-            title={"Users"}
+            title={"Total Users"}
+            value={userCount}
+            color={"blue"}
+            percent={100}
+          ></Ticker>
+        </Col>
+        <Col xl={3} lg={2} sm={6}>
+          <Ticker
+            title={"Total Tests"}
+            value={testsData.length}
+            color={"green"}
+            percent={100}
+          ></Ticker>
+        </Col>
+        <Col xl={3} lg={3} sm={6}>
+          <Ticker
+            title={"Total Instruments"}
+            value={instrumentsData.length}
+            color={"orange"}
+            percent={100}
+          ></Ticker>
+        </Col>
+        <Col xl={3} lg={3} sm={6}>
+          <Ticker
+            title={"Total Benches"}
+            value={benchesData.length}
+            color={"red"}
+            percent={100}
+          ></Ticker>
+        </Col>
+        <Col xl={2} lg={2}>
+          <Ticker
+            title={"Share"}
+            value={0}
+            color={"blue"}
+            percent={90}
+          ></Ticker>
+        </Col>
+        <Col xl={2} lg={2}>
+          <Ticker
+            title={"Social"}
             value={0}
             color={"green"}
-            percent={80}
-          ></Ticker>
-        </Col>
-        <Col xl={3} lg={3}>
-          <Ticker
-            title={"Benches"}
-            value={0}
-            color={"red"}
-            percent={40}
-          ></Ticker>
-        </Col>
-        <Col xl={3} lg={3}>
-          <Ticker
-            title={"Instruments"}
-            value={0}
-            color={"orange"}
-            percent={70}
-          ></Ticker>
-        </Col>
-        <Col xl={3} lg={3}>
-          <Ticker
-            title={"Tests"}
-            value={0}
-            color={"red"}
             percent={90}
           ></Ticker>
         </Col>
@@ -107,96 +147,76 @@ const MyDashboard = () => {
       {/* end widget */}
 
       {/* chart start */}
+      {/* Tests and Instruments Lists - Side by Side */}
       <Row>
         <Col sz={12} sm={12} lg={6}>
-          <Card title={"Tests"} showHeader={true}>
-            <Card showHeader={false}>
+          <Card title={"Recent Tests"} showHeader={true}>
               <DataGrid
                 className={"dx-card wide-card"}
-                dataSource={[]}
-                showColumnHeaders={false}
+                dataSource={testsData}
                 keyExpr={"id"}
-                noDataText={"No tests added yet"}
-                showBorders={false}
-                focusedRowEnabled={false}
-                defaultFocusedRowIndex={0}
+                showBorders={true}
                 columnAutoWidth={true}
-                columnHidingEnabled={true}
+                noDataText={"No tests added yet"}
               >
-                <Paging defaultPageSize={10} />
-                <Editing
-                  mode="row"
-                  allowUpdating={false}
-                  allowDeleting={false}
-                  allowAdding={false}
+                <Paging defaultPageSize={5} />
+                <Column dataField="name" caption="Test Name" />
+                <Column 
+                  dataField="created_at" 
+                  caption="Date" 
+                  dataType="date" 
+                  format={"dd MMM yyyy"} 
                 />
-                <Pager showPageSizeSelector={true} showInfo={true} />
-                <Column
-                  dataField="id"
-                  caption="ID"
-                  hidingPriority={3}
-                  visible={false}
-                ></Column>
-                <Column
-                  dataField="title"
-                  caption="Title"
-                  hidingPriority={2}
-                ></Column>
-                <Column
-                  dataField="created_at"
-                  caption="Date"
-                  dataType="date"
-                  format={"dd MMMM yyy HH:mm"}
-                  hidingPriority={1}
-                ></Column>
               </DataGrid>
-            </Card>
           </Card>
         </Col>
+
         <Col sz={12} sm={12} lg={6}>
-          <Card title={"Instruments"} showHeader={true}>
-            <Card showHeader={false}>
+          <Card title={"Recent Instruments"} showHeader={true}>
               <DataGrid
                 className={"dx-card wide-card"}
-                dataSource={[]}
+                dataSource={instrumentsData}
                 keyExpr={"id"}
-                showColumnHeaders={false}
-                noDataText={`No intruments added yet`}
-                showBorders={false}
-                focusedRowEnabled={false}
-                defaultFocusedRowIndex={0}
+                showBorders={true}
                 columnAutoWidth={true}
-                columnHidingEnabled={true}
+                noDataText={`No instruments added yet`}
               >
-                <Paging defaultPageSize={10} />
-                <Editing
-                  mode="row"
-                  allowUpdating={false}
-                  allowDeleting={false}
-                  allowAdding={false}
+                <Paging defaultPageSize={5} />
+                <Column dataField="name" caption="Instrument" />
+                <Column 
+                  dataField="cost" 
+                  caption="Cost" 
+                  format="K #,##0.00" 
+                  dataType="number"
                 />
-                <Pager showPageSizeSelector={true} showInfo={true} />
-
-                <Column
-                  dataField="id"
-                  caption="ID"
-                  hidingPriority={3}
-                  visible={false}
-                ></Column>
-                <Column
-                  dataField="title"
-                  caption="Title"
-                  hidingPriority={2}
-                ></Column>
-                <Column
-                  dataField="created_at"
-                  caption="Date"
-                  dataType="date"
-                  format={"dd MMMM yyy HH:mm"}
-                  hidingPriority={1}
-                ></Column>
               </DataGrid>
-            </Card>
+          </Card>
+        </Col>
+      </Row>
+
+      {/*Benches List - Full Width */}
+      <Row>
+        <Col sz={12} sm={12} lg={12}>
+          <Card title={"Bench List"} showHeader={true}>
+            <DataGrid
+              className={"dx-card wide-card"}
+              dataSource={benchesData}
+              keyExpr={"id"}
+              showBorders={true}
+              columnAutoWidth={true}
+              noDataText={"No Benches Found"}
+            >
+              <Paging defaultPageSize={5} />
+              <Column dataField="id" caption="ID" visible={false} />
+              <Column dataField="name" caption="Bench Name" />
+              <Column dataField="description" caption="Description" />
+              <Column
+                dataField="created_at"
+                caption="Date Created"
+                dataType="date"
+                format={"dd MMMM yyyy"}
+              />
+            </DataGrid>
           </Card>
         </Col>
       </Row>

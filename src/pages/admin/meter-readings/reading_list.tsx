@@ -19,13 +19,19 @@ import Assist from "../../../classes/assist";
 import PageConfig from "../../../classes/page-config";
 import { useNavigate } from "react-router-dom";
 
-const AdminUsers = () => {
+const AdminMeterReadings = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loadingText, setLoadingText] = useState("Loading data...");
   const [loading, setLoading] = useState(true);
 
-  const pageConfig = new PageConfig("Users", "users/list", "", "Users", "");
+  const pageConfig = new PageConfig(
+    "Meter Readings",
+    "meter-readings/list",
+    "",
+    "Meter Reading",
+    ""
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -50,8 +56,8 @@ const AdminUsers = () => {
   const addButtonOptions = useMemo(
     () => ({
       icon: "add",
-      text: "New User",
-      onClick: () => navigate("/admin/users/add"),
+      text: "New Meter Reading",
+      onClick: () => navigate("/admin/meter-readings/add"),
     }),
     []
   );
@@ -104,20 +110,45 @@ const AdminUsers = () => {
               </Toolbar>
               <Column dataField="id" caption="ID" hidingPriority={6}></Column>
               <Column
-                dataField="fname"
-                caption="First Name"
+                dataField="meter.number"
+                caption="Number"
                 hidingPriority={5}
                 cellRender={(e) => {
                   const getLink = () => {
                     if (e.data.status.status_name == "Draft") {
-                      return `/admin/users/edit/${e.data.id}`;
+                      return `/admin/meter-readings/edit/${e.data.id}`;
                     } else {
-                      return `/admin/users/view/${e.data.id}`;
+                      return `/admin/meter-readings/view/${e.data.id}`;
                     }
                   };
 
                   return <a href={getLink()}>{e.text}</a>;
                 }}
+              ></Column>
+              <Column
+                dataField="current"
+                caption="Current"
+                hidingPriority={4}
+              ></Column>
+              <Column
+                dataField="previous"
+                caption="Previous"
+                hidingPriority={4}
+              ></Column>
+              <Column
+                dataField="customer.fname"
+                caption="Customer First Name"
+                hidingPriority={4}
+              ></Column>
+              <Column
+                dataField="customer.lname"
+                caption="Customer Last Name"
+                hidingPriority={4}
+              ></Column>
+              <Column
+                dataField="customer.mobile"
+                caption="Customer Mobile"
+                hidingPriority={4}
               ></Column>
               <Column
                 dataField="lname"
@@ -146,7 +177,7 @@ const AdminUsers = () => {
               ></Column>
               <Column
                 dataField="created_by"
-                caption="User"
+                caption="Meter Reading"
                 minWidth={120}
                 hidingPriority={2}
                 visible={false}
@@ -166,4 +197,4 @@ const AdminUsers = () => {
   );
 };
 
-export default AdminUsers;
+export default AdminMeterReadings;

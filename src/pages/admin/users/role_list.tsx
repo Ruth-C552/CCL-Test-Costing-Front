@@ -19,19 +19,13 @@ import Assist from "../../../classes/assist";
 import PageConfig from "../../../classes/page-config";
 import { useNavigate } from "react-router-dom";
 
-const AdminExpenseEarningGroups = () => {
+const AdminUsers = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loadingText, setLoadingText] = useState("Loading data...");
   const [loading, setLoading] = useState(true);
 
-  const pageConfig = new PageConfig(
-    "Benchs",
-    "lab-benches/list",
-    "",
-    "Bench",
-    ""
-  );
+  const pageConfig = new PageConfig("User Roles", "user-roles/list", "", "User Role", "");
 
   useEffect(() => {
     setLoading(true);
@@ -42,7 +36,7 @@ const AdminExpenseEarningGroups = () => {
         setLoading(false);
 
         if (res.length === 0) {
-          setLoadingText("No Data");
+          setLoadingText("No announcements added for now");
         } else {
           setLoadingText("");
         }
@@ -53,14 +47,6 @@ const AdminExpenseEarningGroups = () => {
       });
   }, []);
 
-  const addButtonOptions = useMemo(
-    () => ({
-      icon: "add",
-      text: "Refresh",
-      onClick: () => navigate('/admin/benches/add'),
-    }),
-    []
-  );
 
   return (
     <div className="page-content" style={{ minHeight: "862px" }}>
@@ -99,36 +85,25 @@ const AdminExpenseEarningGroups = () => {
               <LoadPanel enabled={loading} />
               <ColumnChooser enabled={true} mode="select"></ColumnChooser>
               <Toolbar>
-                <Item
-                  location="before"
-                  locateInMenu="auto"
-                  showText="inMenu"
-                  widget="dxButton"
-                  options={addButtonOptions}
-                />
                 <Item name="columnChooserButton" />
               </Toolbar>
-              <Column dataField="id" caption="ID" hidingPriority={4}></Column>
+              <Column dataField="id" caption="ID" hidingPriority={6}></Column>
               <Column
-                dataField="name"
-                caption="Name"
-                hidingPriority={3}
-                sortOrder="asc"
-                cellRender={(e) => {
-                  return (
-                    <a
-                      href={`/admin/benches/edit/${e.data.id}`}
-                    >
-                      {e.text}
-                    </a>
-                  );
-                }}
+                dataField="role_name"
+                caption="First Name"
+                hidingPriority={5}
+              ></Column>
+              <Column
+                dataField="description"
+                caption="Description"
+                hidingPriority={4}
               ></Column>
               <Column
                 dataField="created_by"
                 caption="User"
                 minWidth={120}
                 hidingPriority={2}
+                visible={false}
               ></Column>
               <Column
                 dataField="created_at"
@@ -145,4 +120,4 @@ const AdminExpenseEarningGroups = () => {
   );
 };
 
-export default AdminExpenseEarningGroups;
+export default AdminUsers;

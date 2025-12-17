@@ -19,13 +19,19 @@ import Assist from "../../../classes/assist";
 import PageConfig from "../../../classes/page-config";
 import { useNavigate } from "react-router-dom";
 
-const AdminUsers = () => {
+const AdminExpenseEarningGroups = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loadingText, setLoadingText] = useState("Loading data...");
   const [loading, setLoading] = useState(true);
 
-  const pageConfig = new PageConfig("Users", "users/list", "", "Users", "");
+  const pageConfig = new PageConfig(
+    "Expense & Earning Groups",
+    "transaction-groups/list",
+    "",
+    "Expense & Earning Group",
+    ""
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -36,7 +42,7 @@ const AdminUsers = () => {
         setLoading(false);
 
         if (res.length === 0) {
-          setLoadingText("No announcements added for now");
+          setLoadingText("No Data");
         } else {
           setLoadingText("");
         }
@@ -50,8 +56,8 @@ const AdminUsers = () => {
   const addButtonOptions = useMemo(
     () => ({
       icon: "add",
-      text: "New User",
-      onClick: () => navigate("/admin/users/add"),
+      text: "Refresh",
+      onClick: () => navigate('/admin/expense-earning/group/add'),
     }),
     []
   );
@@ -102,54 +108,27 @@ const AdminUsers = () => {
                 />
                 <Item name="columnChooserButton" />
               </Toolbar>
-              <Column dataField="id" caption="ID" hidingPriority={6}></Column>
+              <Column dataField="id" caption="ID" hidingPriority={4}></Column>
               <Column
-                dataField="fname"
-                caption="First Name"
-                hidingPriority={5}
+                dataField="group_name"
+                caption="Name"
+                hidingPriority={3}
+                sortOrder="asc"
                 cellRender={(e) => {
-                  const getLink = () => {
-                    if (e.data.status.status_name == "Draft") {
-                      return `/admin/users/edit/${e.data.id}`;
-                    } else {
-                      return `/admin/users/view/${e.data.id}`;
-                    }
-                  };
-
-                  return <a href={getLink()}>{e.text}</a>;
+                  return (
+                    <a
+                      href={`/admin/expense-earning/group/edit/${e.data.id}`}
+                    >
+                      {e.text}
+                    </a>
+                  );
                 }}
-              ></Column>
-              <Column
-                dataField="lname"
-                caption="Last Name"
-                hidingPriority={4}
-              ></Column>
-              <Column
-                dataField="mobile"
-                caption="Mobile"
-                hidingPriority={4}
-              ></Column>
-              <Column
-                dataField="email"
-                caption="Email"
-                hidingPriority={4}
-              ></Column>
-              <Column
-                dataField="stage.stage_name"
-                caption="Stage"
-                hidingPriority={11}
-              ></Column>
-              <Column
-                dataField="status.status_name"
-                caption="Status"
-                hidingPriority={11}
               ></Column>
               <Column
                 dataField="created_by"
                 caption="User"
                 minWidth={120}
                 hidingPriority={2}
-                visible={false}
               ></Column>
               <Column
                 dataField="created_at"
@@ -166,4 +145,4 @@ const AdminUsers = () => {
   );
 };
 
-export default AdminUsers;
+export default AdminExpenseEarningGroups;
