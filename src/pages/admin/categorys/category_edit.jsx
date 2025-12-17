@@ -39,15 +39,15 @@ const ExpenseEarningGroupEdit = () => {
   const { eId } = useParams(); // Destructure the parameter directly
 
   //posting
-  const [benchName, setBenchName] = useState(null);
-  const [benchDescription, setBenchDescription] = useState(null);
+  const [groupName, setGroupName] = useState(null);
+  const [groupDescription, setGroupDescription] = useState(null);
 
   //service
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
-  const pageConfig = new PageConfig("Bench", "", "", "Bench", "");
+  const pageConfig = new PageConfig("Expense Earning Group", "", "", "Expense Earning Group", "");
 
   pageConfig.Id = eId == undefined ? 0 : Number(eId);
 
@@ -57,7 +57,7 @@ const ExpenseEarningGroupEdit = () => {
       setLoading(true);
 
       setTimeout(() => {
-        Assist.loadData(pageConfig.Title, `lab-benches/id/${pageConfig.Id}`)
+        Assist.loadData(pageConfig.Title, `transaction-groups/id/${pageConfig.Id}`)
           .then((data) => {
             setLoading(false);
             updateVaues(data);
@@ -73,8 +73,8 @@ const ExpenseEarningGroupEdit = () => {
   }, []);
 
   const updateVaues = (data) => {
-    setBenchName(data.name);
-    setBenchDescription(data.description);
+    setGroupName(data.group_name);
+    setGroupDescription(data.description);
   };
 
   const onFormSubmit = (e) => {
@@ -84,16 +84,16 @@ const ExpenseEarningGroupEdit = () => {
 
     const postData = {
       user_id: user.userid,
-      name: benchName,
-      description: benchDescription,
+      group_name: groupName,
+      description: groupDescription,
     };
 
     console.log('pd', postData);
 
 
     const url = pageConfig.Id == 0
-          ? `lab-benches/create`
-          : `lab-benches/update/${pageConfig.Id}`;
+          ? `transaction-groups/create`
+          : `transaction-groups/update/${pageConfig.Id}`;
 
     setTimeout(() => {
       Assist.postPutData(
@@ -113,7 +113,7 @@ const ExpenseEarningGroupEdit = () => {
 
           if (pageConfig.Id == 0) {
             //navigate
-            navigate(`/admin/benches/edit/${data.id}`);
+            navigate(`/admin/expense-earning/group/edit/${data.id}`);
           }
         })
         .catch((message) => {
@@ -159,9 +159,9 @@ const ExpenseEarningGroupEdit = () => {
                     <TextBox
                       className="dx-field-value"
                       placeholder="Name"
-                      value={benchName}
+                      value={groupName}
                       disabled={error || saving}
-                      onValueChange={(text) => setBenchName(text)}
+                      onValueChange={(text) => setGroupName(text)}
                     >
                       <Validator>
                         <RequiredRule message="Name is required" />
@@ -174,10 +174,10 @@ const ExpenseEarningGroupEdit = () => {
                   <div className="dx-field">
                     <HtmlEditor
                       height="525px"
-                      defaultValue={benchDescription}
-                      value={benchDescription}
+                      defaultValue={groupDescription}
+                      value={groupDescription}
                       toolbar={toolbar}
-                      onValueChanged={(e) => setBenchDescription(e.value)}
+                      onValueChanged={(e) => setGroupDescription(e.value)}
                     >
                       <MediaResizing enabled={true} />
                       <Validator>

@@ -19,13 +19,13 @@ import Assist from "../../../classes/assist";
 import PageConfig from "../../../classes/page-config";
 import { useNavigate } from "react-router-dom";
 
-const AdminUsers = () => {
+const AdminTowns = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loadingText, setLoadingText] = useState("Loading data...");
   const [loading, setLoading] = useState(true);
 
-  const pageConfig = new PageConfig("Users", "users/list", "", "Users", "");
+  const pageConfig = new PageConfig("Towns", "towns/list", "", "Towns", "");
 
   useEffect(() => {
     setLoading(true);
@@ -50,8 +50,8 @@ const AdminUsers = () => {
   const addButtonOptions = useMemo(
     () => ({
       icon: "add",
-      text: "New User",
-      onClick: () => navigate("/admin/users/add"),
+      text: "New Town",
+      onClick: () => navigate("/admin/towns/add"),
     }),
     []
   );
@@ -104,15 +104,15 @@ const AdminUsers = () => {
               </Toolbar>
               <Column dataField="id" caption="ID" hidingPriority={6}></Column>
               <Column
-                dataField="fname"
-                caption="First Name"
+                dataField="name"
+                caption="Name"
                 hidingPriority={5}
                 cellRender={(e) => {
                   const getLink = () => {
                     if (e.data.status.status_name == "Draft") {
-                      return `/admin/users/edit/${e.data.id}`;
+                      return `/admin/towns/edit/${e.data.id}`;
                     } else {
-                      return `/admin/users/view/${e.data.id}`;
+                      return `/admin/towns/view/${e.data.id}`;
                     }
                   };
 
@@ -120,18 +120,13 @@ const AdminUsers = () => {
                 }}
               ></Column>
               <Column
-                dataField="lname"
-                caption="Last Name"
+                dataField="code"
+                caption="Code"
                 hidingPriority={4}
               ></Column>
               <Column
-                dataField="mobile"
-                caption="Mobile"
-                hidingPriority={4}
-              ></Column>
-              <Column
-                dataField="email"
-                caption="Email"
+                dataField="description"
+                caption="Description"
                 hidingPriority={4}
               ></Column>
               <Column
@@ -146,7 +141,7 @@ const AdminUsers = () => {
               ></Column>
               <Column
                 dataField="created_by"
-                caption="User"
+                caption="Town"
                 minWidth={120}
                 hidingPriority={2}
                 visible={false}
@@ -166,4 +161,4 @@ const AdminUsers = () => {
   );
 };
 
-export default AdminUsers;
+export default AdminTowns;
