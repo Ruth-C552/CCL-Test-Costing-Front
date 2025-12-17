@@ -95,7 +95,7 @@ const MyDashboard = () => {
 
       {/* start widget */}
       <Row>
-        <Col xl={2} lg={2} sm={6}>
+        <Col xl={3} lg={2} sm={6}>
           <Ticker
             title={"Total Users"}
             value={userCount}
@@ -103,7 +103,7 @@ const MyDashboard = () => {
             percent={100}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2} sm={6}>
+        <Col xl={3} lg={2} sm={6}>
           <Ticker
             title={"Total Tests"}
             value={testsData.length}
@@ -111,7 +111,7 @@ const MyDashboard = () => {
             percent={100}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2} sm={6}>
+        <Col xl={3} lg={3} sm={6}>
           <Ticker
             title={"Total Instruments"}
             value={instrumentsData.length}
@@ -119,7 +119,7 @@ const MyDashboard = () => {
             percent={100}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2} sm={6}>
+        <Col xl={3} lg={3} sm={6}>
           <Ticker
             title={"Total Benches"}
             value={benchesData.length}
