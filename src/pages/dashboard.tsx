@@ -127,22 +127,6 @@ const MyDashboard = () => {
             percent={100}
           ></Ticker>
         </Col>
-        <Col xl={2} lg={2}>
-          <Ticker
-            title={"Share"}
-            value={0}
-            color={"blue"}
-            percent={90}
-          ></Ticker>
-        </Col>
-        <Col xl={2} lg={2}>
-          <Ticker
-            title={"Social"}
-            value={0}
-            color={"green"}
-            percent={90}
-          ></Ticker>
-        </Col>
       </Row>
       {/* end widget */}
 

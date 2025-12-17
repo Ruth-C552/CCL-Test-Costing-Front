@@ -14,6 +14,8 @@ import {
   AdminUsersPage,
   AdminUserEditPage,
   AdminUserPage,
+  AdminBenchesPage,
+  AdminBenchEditPage,
   AdminTestsPage,
   AdminTestsEditPage,
   AdminInstrumentsPage,
