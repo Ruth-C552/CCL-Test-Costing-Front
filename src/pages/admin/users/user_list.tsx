@@ -109,7 +109,8 @@ const AdminUsers = () => {
                 hidingPriority={5}
                 cellRender={(e) => {
                   const getLink = () => {
-                    if (e.data.status.status_name == "Draft") {
+                    // Use ?. to safely chech status, and handle cases where status might be missing 
+                    if (e.data.status?.status_name === "Draft") {
                       return `/admin/users/edit/${e.data.id}`;
                     } else {
                       return `/admin/users/view/${e.data.id}`;
