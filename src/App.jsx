@@ -14,6 +14,8 @@ import {
   AdminUsersPage,
   AdminUserEditPage,
   AdminUserPage,
+  AdminCategoriesPage,
+  AdminCategoriesEditPage,
   AdminBenchesPage,
   AdminBenchEditPage,
   AdminTestsPage,
@@ -72,6 +74,11 @@ function App() {
           {/* Dashboards */}
           <Route path="/" element={<MemberDashboardPage></MemberDashboardPage>} />
 
+
+          {/*expense and earnings*/}
+          <Route path="/admin/categories/list" element={<AdminCategoriesPage/>} />
+          <Route path="/admin/categories/add" element={<AdminCategoriesEditPage/>} />
+          <Route path="/admin/categories/edit/:eId" element={<AdminCategoriesEditPage/>} />
 
           {/*expense and earnings*/}
           <Route path="/admin/benches/list" element={<AdminBenchesPage/>} />

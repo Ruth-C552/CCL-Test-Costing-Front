@@ -20,14 +20,14 @@ export const navigation: MenuItem[] = [
       text: "Dictionairies",
       icon: "fa fa-cube",
       path: "#",
-      roles: [1, 2],
+      roles: [2],
       items: [
         {
           key: "statuses",
           text: "Statuses",
           icon: "",
           path: "/admin/dictionairies/statuses",
-          roles: [1, 2],
+          roles: [2],
           items: [],
         },
         {
@@ -35,7 +35,7 @@ export const navigation: MenuItem[] = [
           text: "Review Stages",
           icon: "",
           path: "/admin/dictionairies/review-stages",
-          roles: [1, 2],
+          roles: [2],
           items: [],
         },
       ],
@@ -71,14 +71,14 @@ export const navigation: MenuItem[] = [
     text: "Towns",
     icon: "fa fa-globe",
     path: "#",
-    roles: [1, 2],
+    roles: [2],
     items: [
       {
         key: "all-towns",
         text: "All Towns",
         icon: "",
         path: "/admin/towns/list",
-        roles: [1, 2],
+        roles: [2],
         items: [],
       },
     ],
@@ -88,14 +88,14 @@ export const navigation: MenuItem[] = [
     text: "Walk Routes",
     icon: "fa fa-map-marker",
     path: "#",
-    roles: [1, 2],
+    roles: [2],
     items: [
       {
         key: "all-walkroutes",
         text: "All Walk Routes",
         icon: "",
         path: "/admin/walk-routes/list",
-        roles: [1, 2],
+        roles: [2],
         items: [],
       },
     ],
@@ -105,14 +105,14 @@ export const navigation: MenuItem[] = [
     text: "Customers",
     icon: "fa fa-users",
     path: "#",
-    roles: [1, 2],
+    roles: [2],
     items: [
       {
         key: "all-customers",
         text: "All Customers",
         icon: "",
         path: "/admin/customers/list",
-        roles: [1, 2],
+        roles: [2],
         items: [],
       },
     ],
@@ -122,14 +122,14 @@ export const navigation: MenuItem[] = [
     text: "Meters",
     icon: "fa fa-tachometer",
     path: "#",
-    roles: [1, 2],
+    roles: [2],
     items: [
       {
         key: "groups",
         text: "All Meters",
         icon: "",
         path: "/admin/meters/list",
-        roles: [1, 2],
+        roles: [2],
         items: [],
       },
     ],
@@ -139,7 +139,7 @@ export const navigation: MenuItem[] = [
     text: "Meter Readings",
     icon: "fa fa-exchange",
     path: "#",
-    roles: [1, 2],
+    roles: [2],
     items: [
       {
         key: "groups",
@@ -151,7 +151,23 @@ export const navigation: MenuItem[] = [
       },
     ],
   },
-
+  {
+    key: "categories",
+    text: "Categories",
+    icon: "fa fa-exchange",
+    path: "#",
+    roles: [1, 2],
+    items: [
+      {
+        key: "groups",
+        text: "All categories",
+        icon: "",
+        path: "/admin/categories/list",
+        roles: [1, 2],
+        items: [],
+      },
+    ],
+  },
   {
     key: "benches",
     text: "Benches",

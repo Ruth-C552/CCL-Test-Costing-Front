@@ -43,13 +43,17 @@ const ExpenseEarningGroupEdit = () => {
     const [testsDescription, setTestsDescription] = useState(null);
     //state for the selected bench ID
     const [selectBenchId, setSelectedBenchId] = useState(null);
+    //state for the selected category ID
+    const [selectCategoryId, setSelectedCategoryId] = useState
 
     //service
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(false);
-        //state for the list of benches
+        //state for the list of benches and categories
     const [benchesList, setBenchesList] = useState([]);
+    const [categoriesList, setCategoriesList] = useState([]);
+
 
     const pageConfig = new PageConfig("Tests", "", "", "Tests", "");
 
@@ -67,9 +71,21 @@ const ExpenseEarningGroupEdit = () => {
             });
     };
 
-    
+    //Function to load benches list
+    const loadCategories = () => {
+        Assist.loadData("Categories", `transaction-categories/list`)
+            .then((data) => {
+              //  console.loadData("Loaded Categories: ", data); //check console to see the keys
+                setCategoriesList(data);
+            })
+            .catch((message) => {
+                Assist.showMessage(`Failed to load categories: ${message}`, "error");
+            });
+    };
+
     useEffect(() => {
         loadBenches(); // populates list when the page opens
+        loadCategories(); // populates list when the page opens
 
         //only load if updating item
         if (pageConfig.Id != 0) {
@@ -91,10 +107,13 @@ const ExpenseEarningGroupEdit = () => {
         }
     }, []);
 
+
+
     const updateVaues = (data) => {
         setTestsName(data.name);
         setTestsDescription(data.description);
         setSelectedBenchId(data.bench_id); //Update selected bench id when editing
+        setSelectedCategoryId(data.category_id); //Update selected category id when editing
     };
 
     const onFormSubmit = (e) => {
@@ -114,6 +133,7 @@ const ExpenseEarningGroupEdit = () => {
          name: testsName,
          description: testsDescription,
          bench_id: selectBenchId,
+         category_id: selectCategoryId,
          created_by: user.sub,
         };
 
@@ -218,6 +238,28 @@ const ExpenseEarningGroupEdit = () => {
                                     >
                                         <Validator>
                                             <RequiredRule message="Bench is required" />
+                                        </Validator>
+                                    </SelectBox>
+                                </div>
+
+                                {/*Category Selection Field*/}
+                                <div className="dx-fieldset-header">CATEGORY</div>
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Select Category</div>
+                                    <SelectBox
+                                        className="dx-field-value"
+                                        dataSource={categoriesList} //ponts to loaded list
+                                        value={selectCategoryId} //Binds to our state
+                                        onValueChange={(val) => setSelectedCategoryId(val)} //updates state on change
+                                        displayExpr="name" //Display Category Name
+                                        valueExpr="id" //display category ID as value
+                                        placeholder="Select a Category"
+                                        showClearButton={true}
+                                        searchEnabled={true}
+                                        disabled={error || saving || loading}
+                                    >
+                                        <Validator>
+                                            <RequiredRule message="Category is required" />
                                         </Validator>
                                     </SelectBox>
                                 </div>

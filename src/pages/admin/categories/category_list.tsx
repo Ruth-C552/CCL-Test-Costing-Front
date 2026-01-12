@@ -26,10 +26,10 @@ const AdminExpenseEarningGroups = () => {
   const [loading, setLoading] = useState(true);
 
   const pageConfig = new PageConfig(
-    "Expense & Earning Groups",
-    "transaction-groups/list",
+    "Category",
+    "transaction-categories/list",
     "",
-    "Expense & Earning Group",
+    "Category",
     ""
   );
 
@@ -57,7 +57,7 @@ const AdminExpenseEarningGroups = () => {
     () => ({
       icon: "add",
       text: "Refresh",
-      onClick: () => navigate('/admin/expense-earning/group/add'),
+      onClick: () => navigate('/admin/categories/add'),
     }),
     []
   );
@@ -110,14 +110,14 @@ const AdminExpenseEarningGroups = () => {
               </Toolbar>
               <Column dataField="id" caption="ID" hidingPriority={4}></Column>
               <Column
-                dataField="group_name"
+                dataField="category_name"
                 caption="Name"
                 hidingPriority={3}
                 sortOrder="asc"
                 cellRender={(e) => {
                   return (
                     <a
-                      href={`/admin/expense-earning/group/edit/${e.data.id}`}
+                      href={`/admin/categories/edit/${e.data.id}`}
                     >
                       {e.text}
                     </a>

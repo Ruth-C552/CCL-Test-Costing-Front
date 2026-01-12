@@ -31,6 +31,9 @@ export { default as AdminMetersPage } from './admin/meters/meter_list'
 //meter readings
 export { default as AdminMeterReadingsPage } from './admin/meter-readings/reading_list'
 
+export { default as AdminCategoriesPage } from './admin/categories/category_list'
+export { default as AdminCategoriesEditPage } from './admin/categories/category_edit'
+
 export { default as AdminBenchesPage } from './admin/benches/bench_list'
 export { default as AdminBenchEditPage } from './admin/benches/bench_edit'
 

@@ -39,15 +39,15 @@ const ExpenseEarningGroupEdit = () => {
   const { eId } = useParams(); // Destructure the parameter directly
 
   //posting
-  const [groupName, setGroupName] = useState(null);
-  const [groupDescription, setGroupDescription] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
+  const [categoryDescription, setCategoryDescription] = useState(null);
 
   //service
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
-  const pageConfig = new PageConfig("Expense Earning Group", "", "", "Expense Earning Group", "");
+  const pageConfig = new PageConfig("Categories", "", "", "Categories", "");
 
   pageConfig.Id = eId == undefined ? 0 : Number(eId);
 
@@ -57,7 +57,7 @@ const ExpenseEarningGroupEdit = () => {
       setLoading(true);
 
       setTimeout(() => {
-        Assist.loadData(pageConfig.Title, `transaction-groups/id/${pageConfig.Id}`)
+        Assist.loadData(pageConfig.Title, `transaction-categories/id/${pageConfig.Id}`)
           .then((data) => {
             setLoading(false);
             updateVaues(data);
@@ -73,8 +73,8 @@ const ExpenseEarningGroupEdit = () => {
   }, []);
 
   const updateVaues = (data) => {
-    setGroupName(data.group_name);
-    setGroupDescription(data.description);
+    setCategoryName(data.category_name);
+    setCategoryDescription(data.description);
   };
 
   const onFormSubmit = (e) => {
@@ -84,16 +84,16 @@ const ExpenseEarningGroupEdit = () => {
 
     const postData = {
       user_id: user.userid,
-      group_name: groupName,
-      description: groupDescription,
+      category_name: categoryName,
+      description: categoryDescription,
     };
 
     console.log('pd', postData);
 
 
     const url = pageConfig.Id == 0
-          ? `transaction-groups/create`
-          : `transaction-groups/update/${pageConfig.Id}`;
+          ? `transaction-categories/create`
+          : `transaction-categories/update/${pageConfig.Id}`;
 
     setTimeout(() => {
       Assist.postPutData(
@@ -113,7 +113,7 @@ const ExpenseEarningGroupEdit = () => {
 
           if (pageConfig.Id == 0) {
             //navigate
-            navigate(`/admin/expense-earning/group/edit/${data.id}`);
+            navigate(`/admin/categories/edit/${data.id}`);
           }
         })
         .catch((message) => {
@@ -153,15 +153,15 @@ const ExpenseEarningGroupEdit = () => {
             <form id="formMain" onSubmit={onFormSubmit}>
               <div className="form">
                 <div className="dx-fieldset">
-                  <div className="dx-fieldset-header">Name</div>
+                  <div className="dx-fieldset-header">CATEGORY NAME</div>
                   <div className="dx-field">
-                    <div className="dx-field-label">Group Name</div>
+                    <div className="dx-field-label">Category Name</div>
                     <TextBox
                       className="dx-field-value"
                       placeholder="Name"
-                      value={groupName}
+                      value={categoryName}
                       disabled={error || saving}
-                      onValueChange={(text) => setGroupName(text)}
+                      onValueChange={(text) => setCategoryName(text)}
                     >
                       <Validator>
                         <RequiredRule message="Name is required" />
@@ -174,10 +174,10 @@ const ExpenseEarningGroupEdit = () => {
                   <div className="dx-field">
                     <HtmlEditor
                       height="525px"
-                      defaultValue={groupDescription}
-                      value={groupDescription}
+                      defaultValue={categoryDescription}
+                      value={categoryDescription}
                       toolbar={toolbar}
-                      onValueChanged={(e) => setGroupDescription(e.value)}
+                      onValueChanged={(e) => setCategoryDescription(e.value)}
                     >
                       <MediaResizing enabled={true} />
                       <Validator>
