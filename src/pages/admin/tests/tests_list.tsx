@@ -56,7 +56,7 @@ const AdminExpenseEarningGroups = () => {
     const addButtonOptions = useMemo(
         () => ({
             icon: "add",
-            text: "Refresh",
+            text: "Add Test",
             onClick: () => navigate('/admin/tests/add'),
         }),
         []
@@ -110,32 +110,44 @@ const AdminExpenseEarningGroups = () => {
                             </Toolbar>
                             <Column dataField="id" caption="ID" hidingPriority={4}></Column>
                             <Column
-                            dataField="name"
-                            caption="Name"
-                            hidingPriority={3}
-                            sortOrder="asc"
-                            cellRender={(e) => {
-                                return (
-                                    <a
-                                      href={`/admin/tests/edit/${e.data.id}`}
-                                      >
-                                        {e.text}
-                                      </a>
-                                );
-                            }}
+                                dataField="name"
+                                caption="Name"
+                                hidingPriority={3}
+                                sortOrder="asc"
+                                cellRender={(e) => {
+                                    return (
+                                        <a
+                                        href={`/admin/tests/edit/${e.data.id}`}
+                                        >
+                                            {e.text}
+                                        </a>
+                                    );
+                                }}
                             ></Column>
                             <Column
-                            dataField="created_by"
-                            caption="User"
-                            minWidth={120}
-                            hidingPriority={2}
+                                dataField="bench"
+                                caption="Bench"
+                                minWidth={120}
+                                hidingPriority={2}
                             ></Column>
                             <Column
-                             dataField="created_at"
-                             caption="Date"
-                             dataType="date"
-                             format="dd MMM yyy HH:MM"
-                             hidingPriority={1}
+                                dataField="category"
+                                caption="Category"
+                                minWidth={120}
+                                hidingPriority={2}
+                            ></Column>
+                            <Column
+                                dataField="created_by"
+                                caption="User"
+                                minWidth={120}
+                                hidingPriority={2}
+                            ></Column>
+                            <Column
+                                dataField="created_at"
+                                caption="Date"
+                                dataType="date"
+                                format="dd MMM yyy HH:MM"
+                                hidingPriority={1}
                             ></Column>
                         </DataGrid>
                     </Card>

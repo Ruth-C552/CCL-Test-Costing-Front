@@ -44,12 +44,13 @@ const ExpenseEarningGroupEdit = () => {
     //state for the selected bench ID
     const [selectBenchId, setSelectedBenchId] = useState(null);
     //state for the selected category ID
-    const [selectCategoryId, setSelectedCategoryId] = useState
+    const [selectCategoryId, setSelectedCategoryId] = useState(null);
 
     //service
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(false);
+
         //state for the list of benches and categories
     const [benchesList, setBenchesList] = useState([]);
     const [categoriesList, setCategoriesList] = useState([]);
@@ -59,34 +60,20 @@ const ExpenseEarningGroupEdit = () => {
 
     pageConfig.Id = eId == undefined ? 0 : Number(eId);
 
-    //Function to load benches list
-    const loadBenches = () => {
-        Assist.loadData("Benches", `lab-benches/list`)
-            .then((data) => {
-              //  console.loadData("Loaded Benches: ", data); //check console to see the keys
-                setBenchesList(data);
-            })
-            .catch((message) => {
-                Assist.showMessage(`Failed to load benches: ${message}`, "error");
-            });
-    };
+    //Function to load benches and categories
+    useEffect(() => {
+    Assist.loadData("Benches", "lab-benches/list")
+      .then(setBenchesList)
+      .catch((m) => Assist.showMessage(m, "error"));
 
-    //Function to load benches list
-    const loadCategories = () => {
-        Assist.loadData("Categories", `transaction-categories/list`)
-            .then((data) => {
-              //  console.loadData("Loaded Categories: ", data); //check console to see the keys
-                setCategoriesList(data);
-            })
-            .catch((message) => {
-                Assist.showMessage(`Failed to load categories: ${message}`, "error");
-            });
-    };
+    Assist.loadData("Categories", "transaction-categories/list")
+      .then(setCategoriesList)
+      .catch((m) => Assist.showMessage(m, "error"));
+
+  }, []);
+    
 
     useEffect(() => {
-        loadBenches(); // populates list when the page opens
-        loadCategories(); // populates list when the page opens
-
         //only load if updating item
         if (pageConfig.Id != 0) {
             setLoading(true);
